@@ -1,7 +1,7 @@
-import User from '../Models/authuser.model.js'
-import Conversation from '../Models/conversation.model.js';
+const User = require ('../Models/authuser.model');
+const Conversation = require ('../Models/conversation.model');
 
-export const getUserBySearch = async(req,res)=>{
+const getUserBySearch = async(req,res)=>{
     try {
        const search = req.query.search || '';
        const currentUserID = req.user._id;
@@ -25,7 +25,7 @@ export const getUserBySearch = async(req,res)=>{
 
 
 
-export const getCurrentChatter= async(req,res)=>{
+const getCurrentChatter= async(req,res)=>{
     try {
         const currentUserID = req.user._id;
         const currentChatters = await Conversation.find({
@@ -54,3 +54,5 @@ export const getCurrentChatter= async(req,res)=>{
         
     }
 }
+
+module.exports = {getUserBySearch , getCurrentChatter}

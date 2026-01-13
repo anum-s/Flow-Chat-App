@@ -1,17 +1,15 @@
-// const express = require ('express')
-// const dotenv = require ('dotenv')
-// const dbconnect = require ("./DB/dbconnect")
+const express = require ('express')
+const dotenv = require ('dotenv')
+const dbconnect = require ('./DB/dbconnect')
+const cookieParser = require ('cookie-parser')
 
-import express from 'express'
-import dotenv from 'dotenv'
-import dbconnect from "./DB/dbconnect.js"
-import authRouter from "./Routes/authuser.route.js"
-import messageRouter from "./Routes/message.route.js"
-import cookieParser from 'cookie-parser'
-import userRouter from "./Routes/user.route.js"
-// import path from 'path'; //C.D
+// For routes
+const authRouter = require ('./Routes/authuser.route')
+const messageRouter = require ('./Routes/message.route')
+const userRouter = require ('./Routes/user.route')
 
-import {app,server} from './Socket/socket.js'
+// Socket
+const {app,server}  = require  ('./Socket/socket')
 
 // const __dirname = path.resolve(); // C.D
 
@@ -19,10 +17,10 @@ import {app,server} from './Socket/socket.js'
 dotenv.config()
 const PORT = process.env.PORT
 
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.json());
+app.use(cookieParser());
 
-
+//Routes
 app.use('/api/auth', authRouter)
 app.use('/api/message', messageRouter)
 app.use('/api/user', userRouter)
@@ -38,6 +36,8 @@ app.use('/api/user', userRouter)
 app.get('/',(req,res)=>{
     res.send("server is running successfully")
 })
+
+//Database and server start
 
 dbconnect().then(() => {
     server.listen(PORT, () => {

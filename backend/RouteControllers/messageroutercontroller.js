@@ -1,8 +1,8 @@
-import Message from "../Models/message.model.js"
-import Conversation from "../Models/conversation.model.js"
-import { getReceiverSocket,io } from "../Socket/socket.js";
+const Message = require ("../Models/message.model")
+const Conversation = require ( "../Models/conversation.model")
+const { getReceiverSocket,io } = require ( "../Socket/socket");
 
-export const sendMessage = async(req,res)=>{
+const sendMessage = async(req,res)=>{
     try {
     const {message} = req.body
     const {id:receiverId} = req.params;
@@ -42,7 +42,7 @@ export const sendMessage = async(req,res)=>{
 }
 
 
-export const getMessage = async(req,res)=>{
+const getMessage = async(req,res)=>{
     try {
         const {id:receiverId} = req.params;
         const senderId = req.user._id
@@ -57,3 +57,5 @@ export const getMessage = async(req,res)=>{
         res.status(500).json({success: false , message: error.message})
     }
 }
+
+module.exports = {sendMessage , getMessage}

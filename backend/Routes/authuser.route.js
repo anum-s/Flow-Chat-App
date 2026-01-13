@@ -1,6 +1,5 @@
-import express from 'express'
-import { userRegister,userLogin,userLogout } from '../RouteControllers/authuserroutercontroller.js'
-
+const express = require('express');
+const { userRegister,userLogin,userLogout } = require ('../RouteControllers/authuserroutercontroller.js')
 
 const router = express.Router()
 
@@ -10,4 +9,4 @@ router.post('/logout' , userLogout)
 
 
 
-export default router
+module.exports = router;

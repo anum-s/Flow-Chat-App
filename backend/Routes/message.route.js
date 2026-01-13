@@ -1,6 +1,6 @@
-import express from 'express'
-import { sendMessage, getMessage} from '../RouteControllers/messageroutercontroller.js'
-import isLogin from '../Middleware/isLogin.js'
+const express = require('express');
+const { sendMessage, getMessage } = require('../RouteControllers/messageroutercontroller');
+const isLogin = require('../Middleware/isLogin');
 
 const router = express.Router()
 
@@ -9,4 +9,4 @@ router.get('/:id',isLogin , getMessage)
 
 
 
-export default router
+module.exports = router;

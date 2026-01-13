@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import User from "../Models/authuser.model.js";
+const jwt = require ('jsonwebtoken');
+const User = require ("../Models/authuser.model");
 
-export const isLogin = async(req,res,next)=>{
+const isLogin = async(req,res,next)=>{
     try {
      const token = req.cookies.jwt
      if(!token) return res.status(401).json({success:false,message: "User Unauthorized"})
@@ -17,4 +17,4 @@ export const isLogin = async(req,res,next)=>{
     }
 }
 
-export default isLogin
+module.exports = isLogin

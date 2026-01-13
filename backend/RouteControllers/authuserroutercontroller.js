@@ -1,11 +1,11 @@
-import bcrypt from "bcryptjs";
-import User from "../Models/authuser.model.js";
-import jwtToken from '../Utils/jwtwebToken.js';
+const bcrypt = require ("bcryptjs");
+const User = require ("../Models/authuser.model");
+const jwtToken = require ('../Utils/jwtwebToken');
 
 
 // For Register
 
-export const userRegister = async(req,res)=>{
+const userRegister = async(req,res)=>{
     try {
         const {fullname,username,email,password,profilepic,gender} = req.body;
         const existingUser = await User.findOne({$or: [{username},{email}],});
@@ -47,7 +47,7 @@ export const userRegister = async(req,res)=>{
 
 // For Login
 
-export const userLogin = async(req,res)=>{
+const userLogin = async(req,res)=>{
     try {
        const {email,password} = req.body;
        const user = await User.findOne ({email})
@@ -75,7 +75,7 @@ export const userLogin = async(req,res)=>{
 
 // For Logout
 
-export const userLogout = async(req,res)=>{
+const userLogout = async(req,res)=>{
     try {
         res.cookie("jwt", '' , {
             maxAge : 0
@@ -85,3 +85,5 @@ export const userLogout = async(req,res)=>{
         res.status(500).json({success: false, message: error.message})        
     }
 }
+
+module.exports = { userRegister, userLogin, userLogout };
