@@ -2,6 +2,7 @@ const express = require ('express')
 const dotenv = require ('dotenv')
 const dbconnect = require ('./DB/dbconnect')
 const cookieParser = require ('cookie-parser')
+const cors = require('cors');
 
 // For routes
 const authRouter = require ('./Routes/authuser.route')
@@ -16,6 +17,11 @@ const {app,server}  = require  ('./Socket/socket')
 
 dotenv.config()
 const PORT = process.env.PORT
+
+app.use(cors({
+  origin: "http://localhost:5173", // <-- replace with your deployed frontend URL
+  credentials: true
+}))
 
 app.use(express.json());
 app.use(cookieParser());
